@@ -2,17 +2,17 @@
 
 db.tp.insert({
     name: "Tuileries",
-    location: { type: "Point", coordinates: [48.86448891012796, 2.3241233825683594] },
+    location: { type: "Point", coordinates: [2.3241233825683594, 48.86448891012796] },
 });
 
 db.tp.insert({
     name: "Tricadero",
-    location: { type: "Point", coordinates: [48.861778610526805, 2.2889328002929688] },
+    location: { type: "Point", coordinates: [2.2889328002929688, 48.861778610526805] },
 });
 
 db.tp.insert({
     name: "Montsouris",
-    location: { type: "Point", coordinates: [48.822406260848375, 2.3383712768554688,] },
+    location: { type: "Point", coordinates: [2.3383712768554688, 48.822406260848375] },
 });
 
 //2 - Prendre un point aléatoire dans paris, trouver le point le plus proche
@@ -22,7 +22,7 @@ db.tp.createIndex({ location: "2dsphere" })
 db.tp.aggregate([
     {
         $geoNear: {
-            near: { type: "Point", coordinates: [48.85726111835348, 2.319488525390625] },
+            near: { type: "Point", coordinates: [2.319488525390625, 48.85726111835348] },
             spherical: true,
             distanceField: "calcDistance"
         }
@@ -36,7 +36,7 @@ db.tp.find(
         {
             $near:
             {
-                $geometry: { type: "Point", coordinates: [48.85726111835348, 2.319488525390625] },
+                $geometry: { type: "Point", coordinates: [2.319488525390625, 48.85726111835348] },
             }
         }
     }
@@ -48,7 +48,7 @@ db.tp.findOne(
         {
             $near:
             {
-                $geometry: { type: "Point", coordinates: [48.85726111835348, 2.319488525390625] },
+                $geometry: { type: "Point", coordinates: [2.319488525390625, 48.85726111835348] },
             }
         }
     }
@@ -62,7 +62,7 @@ db.tp.find(
             $geoWithin: {
                 $geometry: {
                     type: "Polygon",
-                    coordinates: [[[48.85726111835348, 2.319488525390625], [48.87019135286425, 2.341289520263672], [48.859406977973094, 2.268247604370117], [48.85726111835348, 2.319488525390625]]]
+                    coordinates: [[[2.319488525390625, 48.85726111835348], [2.341289520263672, 48.87019135286425], [2.268247604370117, 48.859406977973094], [2.319488525390625, 48.85726111835348]]]
                 }
             }
         }
@@ -77,9 +77,9 @@ db.tp.find(
             $nearSphere: {
                 $geometry: {
                     type: "Point",
-                    coordinates: [48.85726111835348, 2.319488525390625]
+                    coordinates: [2.319488525390625, 48.85726111835348]
                 },
-                $maxDistance: 3000 //3km
+                $maxDistance: 3000 // 3km
             }
         }
     }
